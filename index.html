@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engenheiros Associados - Laudos Técnicos para Residências</title>
+    <meta name="description" content="Soluções técnicas para problemas em residências com laudos e pareceres assinados por engenheiros civis. Resolva rachaduras, infiltrações e outros problemas sem precisar de ação judicial.">
+    
+    <!-- Pré-carregar recursos críticos -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" as="style">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Pré-carregar fontes -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a8a',
+                        secondary: '#1e40af',
+                        accent: '#3b82f6',
+                        dark: '#0f172a',
+                        light: '#f8fafc',
+                        'dark-bg': '#1a202c',
+                        'dark-card': '#2d3748',
+                        'dark-text': '#e2e8f0',
+                    },
+                    transitionProperty: {
+                        'size': 'transform, box-shadow',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            scroll-behavior: smooth;
+        }
+        
+        .hero-bg {
+            background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+            will-change: transform, box-shadow;
+        }
+        
+        .service-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+        }
+        
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+        
+        /* Animação de scroll otimizada */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .fade-in-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Botão flutuante para WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: #FFF;
+            border-radius: 50%;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Melhorias para formulário */
+        input, textarea, select {
+            transition: all 0.2s ease;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+        
+        /* Melhorias de acessibilidade para modo escuro */
+        @media (prefers-color-scheme: dark) {
+            .dark\:bg-dark-bg {
+                background-color: #111827;
+            }
+            .dark\:bg-dark-card {
+                background-color: #1f2937;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased bg-light dark:bg-dark-bg text-dark dark:text-dark-text">
+    <!-- Botão flutuante do WhatsApp -->
+    <a href="https://wa.me/5544999999999?text=Olá,%20gostaria%20de%20solicitar%20um%20orçamento" 
+       target="_blank" 
+       class="whatsapp-float"
+       aria-label="Fale conosco pelo WhatsApp">
+        <i class="fab fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- Cabeçalho (Header) -->
+    <header class="fixed w-full bg-white dark:bg-dark-card shadow-md z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white font-bold text-xl mr-3" aria-hidden="true">EA</div>
+                <h1 class="text-xl font-bold text-primary dark:text-accent">Engenheiros<br>Associados</h1>
+            </div>
+            
+            <nav class="hidden md:flex space-x-8" aria-label="Navegação principal">
+                <a href="#inicio" class="text-dark dark:text-dark-text hover:text-accent font-medium transition-all">Início</a>
+                <a href="#estatisticas" class="text-dark dark:text-dark-text hover:text-accent font-medium transition-all">Estatísticas</a>
+                <a href="#como-funciona" class="text-dark dark:text-dark-text hover:text-accent font-medium transition-all">Como Funciona</a>
+                <a href="#sobre-nos" class="text-dark dark:text-dark-text hover:text-accent font-medium transition-all">Sobre Nós</a>
+                <a href="#servicos" class="text-dark dark:text-dark-text hover:text-accent font-medium transition-all">Serviços</a>
+                <a href="#contato" class="text-dark dark:text-dark-text hover:text-accent font-medium transition-all">Contato</a>
+            </nav>
+            
+            <div class="hidden md:flex items-center space-x-4">
+                <button id="theme-toggle" class="text-dark dark:text-dark-text hover:text-accent dark:hover:text-accent text-xl" aria-label="Alternar modo claro/escuro">
+                    <i id="theme-icon" class="fas fa-moon"></i>
+                </button>
+                <a href="#contato" class="bg-accent hover:bg-secondary text-white font-medium py-2 px-6 rounded-full transition-all flex items-center">
+                    <i class="fas fa-phone-alt mr-2" aria-hidden="true"></i> Solicite seu Orçamento
+                </a>
+            </div>
+            
+            <div class="md:hidden flex items-center space-x-4">
+                <button id="theme-toggle-mobile" class="text-dark dark:text-dark-text hover:text-accent dark:hover:text-accent text-xl" aria-label="Alternar modo claro/escuro">
+                    <i id="theme-icon-mobile" class="fas fa-moon"></i>
+                </button>
+                <button class="text-primary dark:text-dark-text text-2xl" id="mobile-menu-button" aria-expanded="false" aria-controls="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Menu Móvel -->
+        <div class="hidden md:hidden bg-white dark:bg-dark-card w-full py-4 px-4 shadow-lg" id="mobile-menu" aria-hidden="true">
+            <div class="flex flex-col space-y-4 text-dark dark:text-dark-text">
+                <a href="#inicio" class="hover:text-accent font-medium">Início</a>
+                <a href="#estatisticas" class="hover:text-accent font-medium">Estatísticas</a>
+                <a href="#como-funciona" class="hover:text-accent font-medium">Como Funciona</a>
+                <a href="#sobre-nos" class="hover:text-accent font-medium">Sobre Nós</a>
+                <a href="#servicos" class="hover:text-accent font-medium">Serviços</a>
+                <a href="#contato" class="hover:text-accent font-medium">Contato</a>
+                <a href="#contato" class="bg-accent hover:bg-secondary text-white font-medium py-2 px-6 rounded-full text-center">
+                    Solicite Orçamento
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Seção de Hero -->
+    <section id="inicio" class="hero-bg pt-32 pb-20 text-white px-4">
+        <div class="container mx-auto flex flex-col md:flex-row items-center fade-in-up">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">Você pode resolver o problema da sua casa sem precisar ir à Justiça!</h1>
+                <p class="text-xl mb-8 text-gray-300">Com um laudo técnico profissional, você pode exigir a solução diretamente com quem causou o problema, sem contratar advogado e sem processo judicial.</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#contato" class="bg-accent hover:bg-secondary text-white font-bold py-3 px-8 rounded-full text-center transition-all">
+                        Solicitar Orçamento Agora
+                    </a>
+                    <a href="#como-funciona" class="bg-white hover:bg-gray-100 text-primary font-bold py-3 px-8 rounded-full text-center transition-all">
+                        Como Funciona
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <div class="bg-white dark:bg-dark-card p-4 rounded-lg shadow-xl max-w-md">
+                    <!-- Imagem otimizada com lazy loading -->
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" 
+                         srcset="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80 400w,
+                                 https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80 600w,
+                                 https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80 800w"
+                         sizes="(max-width: 768px) 100vw, 50vw"
+                         alt="Casa com rachaduras e um engenheiro civil." 
+                         class="rounded-lg w-full h-auto"
+                         loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Estatísticas -->
+    <section id="estatisticas" class="py-16 px-4 bg-light dark:bg-dark-bg">
+        <div class="container mx-auto text-center fade-in-up">
+            <h2 class="text-3xl font-bold mb-4 text-primary dark:text-accent">Não deixe o problema piorar</h2>
+            <p class="text-xl text-gray-600 dark:text-dark-text max-w-3xl mx-auto mb-12">Quanto antes for documentado, mais fácil é resolver. Um laudo técnico profissional protege seu imóvel, economiza com reformas e evita dor de cabeça.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white dark:bg-dark-card p-6 rounded-lg shadow-md transition-all fade-in-up">
+                    <div class="text-accent text-5xl mb-4" aria-hidden="true">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-dark dark:text-dark-text">28%</h3>
+                    <p class="text-gray-600 dark:text-dark-text">dos domicílios no Brasil têm infiltrações ou mofo (IBGE)</p>
+                </div>
+                
+                <div class="bg-white dark:bg-dark-card p-6 rounded-lg shadow-md transition-all fade-in-up">
+                    <div class="text-accent text-5xl mb-4" aria-hidden="true">
+                        <i class="fas fa-ruler-combined"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-dark dark:text-dark-text">22%</h3>
+                    <p class="text-gray-600 dark:text-dark-text">apresentam rachaduras em paredes (IBGE)</p>
+                </div>
+                
+                <div class="bg-white dark:bg-dark-card p-6 rounded-lg shadow-md transition-all fade-in-up">
+                    <div class="text-accent text-5xl mb-4" aria-hidden="true">
+                        <i class="fas fa-toolbox"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-dark dark:text-dark-text">18%</h3>
+                    <p class="text-gray-600 dark:text-dark-text">têm alvenaria exposta ou acabamento inacabado (IBGE)</p>
+                </div>
+
+                <div class="bg-white dark:bg-dark-card p-6 rounded-lg shadow-md transition-all fade-in-up">
+                    <div class="text-accent text-5xl mb-4" aria-hidden="true">
+                        <i class="fas fa-house-damage"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2 text-dark dark:text-dark-text">16%</h3>
+                    <p class="text-gray-600 dark:text-dark-text">com sinais de problemas estruturais visíveis (IBGE)</p>
+                </div>
+            </div>
+            <p class="text-sm text-gray-500 dark:text-dark-text mt-8">Fonte: Dados do IBGE - Censo 2022</p>
+        </div>
+    </section>
+
+    <!-- Seção Como Funciona -->
+    <section id="como-funciona" class="py-16 px-4 bg-white dark:bg-dark-card">
+        <div class="container mx-auto fade-in-up">
+            <h2 class="text-3xl font-bold text-center mb-4 text-primary dark:text-accent">Como Funciona</h2>
+            <p class="text-xl text-gray-600 dark:text-dark-text text-center mb-12 max-w-3xl mx-auto">Um processo simples e transparente para resolver seu problema</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="flex flex-col items-center text-center p-6 fade-in-up">
+                    <div class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-4" aria-hidden="true">1</div>
+                    <h3 class="text-xl font-bold mb-3">Envie informações</h3>
+                    <p class="text-gray-600 dark:text-dark-text">Nos conte sobre o problema e envie fotos e/ou vídeos pelo nosso formulário.</p>
+                </div>
+                
+                <div class="flex flex-col items-center text-center p-6 fade-in-up">
+                    <div class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-4" aria-hidden="true">2</div>
+                    <h3 class="text-xl font-bold mb-3">Receba orçamento</h3>
+                    <p class="text-gray-600 dark:text-dark-text">Analisaremos seu caso e enviaremos uma proposta sem compromisso.</p>
+                </div>
+                
+                <div class="flex flex-col items-center text-center p-6 fade-in-up">
+                    <div class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-4" aria-hidden="true">3</div>
+                    <h3 class="text-xl font-bold mb-3">Vistoria técnica</h3>
+                    <p class="text-gray-600 dark:text-dark-text">Realizaremos uma vistoria presencial ou online, dependendo da necessidade.</p>
+                </div>
+                
+                <div class="flex flex-col items-center text-center p-6 fade-in-up">
+                    <div class="bg-primary text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl font-bold mb-4" aria-hidden="true">4</div>
+                    <h3 class="text-xl font-bold mb-3">Receba seu laudo</h3>
+                    <p class="text-gray-600 dark:text-dark-text">Documento assinado digitalmente com todas as análises e recomendações técnicas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Sobre Nós -->
+    <section id="sobre-nos" class="py-16 px-4 bg-light dark:bg-dark-bg">
+        <div class="container mx-auto flex flex-col md:flex-row items-center gap-8 fade-in-up">
+            <div class="md:w-1/3 flex justify-center">
+                <div class="w-64 h-64 overflow-hidden rounded-full shadow-lg border-4 border-accent">
+                    <!-- Imagem de perfil corrigida -->
+                    <img src="imagem.png" 
+                         srcset="imagem.png 1x, imagem@2x.png 2x"
+                         sizes="(max-width: 768px) 100vw, 33vw"
+                         alt="Foto de perfil do Engenheiro Tiago Martins" 
+                         class="w-full h-full object-cover"
+                         loading="lazy">
+                </div>
+            </div>
+            <div class="md:w-2/3 text-center md:text-left">
+                <h2 class="text-3xl font-bold mb-4 text-primary dark:text-accent">Eng. Tiago Martins</h2>
+                <p class="text-lg mb-4 text-gray-600 dark:text-dark-text">Engenheiro Civil com registro no CREA PR 148993/D, especialista em soluções técnicas para problemas residenciais. Minha missão é ajudar você a resolver questões como rachaduras, infiltrações e falhas construtivas de forma rápida, eficiente e sem burocracia judicial.</p>
+                <p class="text-lg text-gray-600 dark:text-dark-text">Atendimento presencial no noroeste do Paraná e 100% online para todo o Brasil.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Serviços com novo estilo de card -->
+    <section id="servicos" class="py-16 px-4 bg-white dark:bg-dark-card">
+        <div class="container mx-auto fade-in-up">
+            <h2 class="text-4xl font-bold text-center mb-4 text-primary dark:text-accent">Nossos Serviços</h2>
+            <p class="text-xl text-center mb-12 text-gray-600 dark:text-dark-text max-w-3xl mx-auto">Conheça as soluções que oferecemos para os problemas mais comuns em residências.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Serviço 1 -->
+                <div class="service-card group relative overflow-hidden rounded-xl shadow-lg bg-white dark:bg-dark-card cursor-pointer fade-in-up">
+                    <img src="nathan-jeon-3o4GFOwXGyU-unsplash.jpg"
+                         alt="Rachaduras em parede" 
+                         class="w-full h-48 object-cover"
+                         loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-dark dark:text-dark-text">Rachaduras e Trincas</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Identificamos a origem e gravidade de fissuras em paredes e estruturas, garantindo a segurança do seu imóvel.</p>
+                    </div>
+                    <div class="absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <a href="#contato" class="text-white text-lg font-bold p-4 rounded-full border-2 border-white hover:bg-white hover:text-primary transition-all">Saiba Mais</a>
+                    </div>
+                </div>
+
+                <!-- Serviço 2 -->
+                <div class="service-card group relative overflow-hidden rounded-xl shadow-lg bg-white dark:bg-dark-card cursor-pointer fade-in-up">
+                    <img src="mak-JMEqR08Rke0-unsplash.jpg"
+                         alt="Infiltrações e umidade" 
+                         class="w-full h-48 object-cover"
+                         loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-dark dark:text-dark-text">Infiltrações e Umidade</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Diagnóstico preciso da origem e solução para problemas de infiltração, mofo e umidade.</p>
+                    </div>
+                    <div class="absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <a href="#contato" class="text-white text-lg font-bold p-4 rounded-full border-2 border-white hover:bg-white hover:text-primary transition-all">Saiba Mais</a>
+                    </div>
+                </div>
+
+                <!-- Serviço 3 -->
+                <div class="service-card group relative overflow-hidden rounded-xl shadow-lg bg-white dark:bg-dark-card cursor-pointer fade-in-up">
+                    <img src="basil-anas-jvvDtttSuy0-unsplash.jpg"
+                         alt="Danos por obra vizinha" 
+                         class="w-full h-48 object-cover"
+                         loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-dark dark:text-dark-text">Danos por Obra Vizinha</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Avaliação de danos causados por escavações ou construções próximas ao seu imóvel.</p>
+                    </div>
+                    <div class="absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <a href="#contato" class="text-white text-lg font-bold p-4 rounded-full border-2 border-white hover:bg-white hover:text-primary transition-all">Saiba Mais</a>
+                    </div>
+                </div>
+
+                <!-- Serviço 4 -->
+                <div class="service-card group relative overflow-hidden rounded-xl shadow-lg bg-white dark:bg-dark-card cursor-pointer fade-in-up">
+                    <img src="emmanuel-ikwuegbu--0-kl1BjvFc-unsplash.jpg"
+                         alt="Falhas Construtivas" 
+                         class="w-full h-48 object-cover"
+                         loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-dark dark:text-dark-text">Falhas Construtivas</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Avaliação de problemas de acabamento ou estruturais que desvalorizam o imóvel.</p>
+                    </div>
+                    <div class="absolute inset-0 bg-primary bg-opacity-80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <a href="#contato" class="text-white text-lg font-bold p-4 rounded-full border-2 border-white hover:bg-white hover:text-primary transition-all">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Contato -->
+    <section id="contato" class="py-16 px-4 bg-light dark:bg-dark-bg">
+        <div class="container mx-auto fade-in-up">
+            <h2 class="text-3xl font-bold text-center mb-4 text-primary dark:text-accent">Solicite seu Orçamento</h2>
+            <p class="text-xl text-center mb-12 text-gray-600 dark:text-dark-text max-w-3xl mx-auto">Preencha o formulário abaixo e entraremos em contato para resolver seu problema.</p>
+
+            <div class="bg-white dark:bg-dark-card p-8 rounded-lg shadow-md max-w-2xl mx-auto">
+                <form id="contact-form">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                        <div>
+                            <label for="name" class="block font-medium mb-2 text-dark dark:text-dark-text">Nome Completo</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-light dark:bg-dark-card" required>
+                        </div>
+                        <div>
+                            <label for="phone" class="block font-medium mb-2 text-dark dark:text-dark-text">Telefone (com DDD)</label>
+                            <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-light dark:bg-dark-card" required>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                        <div>
+                            <label for="email" class="block font-medium mb-2 text-dark dark:text-dark-text">E-mail</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-light dark:bg-dark-card" required>
+                        </div>
+                        <div>
+                            <label for="city" class="block font-medium mb-2 text-dark dark:text-dark-text">Cidade</label>
+                            <input type="text" id="city" name="city" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-light dark:bg-dark-card" required>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="problem" class="block font-medium mb-2 text-dark dark:text-dark-text">Descreva o Problema</label>
+                        <textarea id="problem" name="problem" rows="5" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-light dark:bg-dark-card" placeholder="Explique com o máximo de detalhes o que ocorreu, datas importantes, contatos feitos, etc." required></textarea>
+                    </div>
+                    <div class="mb-6">
+                        <label for="file" class="block font-medium mb-2 text-dark dark:text-dark-text">Foto ou Documento Comprobatório (opcional)</label>
+                        <input type="file" id="file" name="file" class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent bg-light dark:bg-dark-card">
+                    </div>
+                    <button type="submit" class="w-full bg-accent hover:bg-secondary text-white font-bold py-3 px-6 rounded-full transition-all">
+                        Enviar
+                    </button>
+                    <!-- Custom Alert Box -->
+                    <div id="custom-alert" class="hidden fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-dark-card border border-gray-300 dark:border-gray-600 rounded-lg p-6 shadow-xl z-50">
+                        <p id="alert-message" class="text-dark dark:text-dark-text mb-4 text-center"></p>
+                        <button id="alert-close" class="bg-accent hover:bg-secondary text-white font-bold py-2 px-4 rounded-full block mx-auto">OK</button>
+                    </div>
+                    <!-- Overlay for the alert box -->
+                    <div id="alert-overlay" class="hidden fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-40"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="bg-dark dark:bg-dark-card text-white py-12 px-4">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-xl font-bold mb-4 text-white dark:text-dark-text">Engenheiros Associados</h3>
+                <p class="text-gray-400 mb-4">Soluções técnicas para problemas em residências com laudos e pareceres assinados por engenheiros civis.</p>
+                <div class="flex space-x-4 text-gray-400">
+                    <a href="https://instagram.com/tiagmartns" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-all"><i class="fab fa-instagram"></i></a>
+                    <a href="mailto:Martins.laudo@gmail.com" class="hover:text-accent transition-all"><i class="fas fa-envelope"></i></a>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-xl font-bold mb-4 text-white dark:text-dark-text">Informações Legais</h3>
+                <ul class="space-y-2 text-gray-400">
+                    <li><p>Martins Soluções Integradas Ltda - CNPJ 54.627.124/0001-20</p></li>
+                    <li><p>Eng. Tiago Martins - CREA PR 148993/D</p></li>
+                    <li><a href="#" class="hover:text-accent">Política de Privacidade</a></li>
+                    <li><a href="#" class="hover:text-accent">Termos de Uso</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h3 class="text-xl font-bold mb-4 text-white dark:text-dark-text">Nossa Localização</h3>
+                <p class="text-gray-400 mb-2">Atendimento em todo o Brasil, principalmente na região noroeste do Paraná.</p>
+                <p class="text-gray-400">Também realizamos atendimento 100% online.</p>
+            </div>
+        </div>
+        <div class="text-center text-gray-500 mt-12 pt-8 border-t border-gray-700 dark:border-gray-500">
+            &copy; 2024 Engenheiros Associados. Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <script>
+        // --- Lógica para o Modo Escuro ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const htmlElement = document.documentElement;
+        const themeIcon = document.getElementById('theme-icon');
+        const themeIconMobile = document.getElementById('theme-icon-mobile');
+
+        // Verifica a preferência do sistema ou o localStorage
+        function applyThemePreference() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                htmlElement.classList.add('dark');
+                if (themeIcon) themeIcon.classList.replace('fa-moon', 'fa-sun');
+                if (themeIconMobile) themeIconMobile.classList.replace('fa-moon', 'fa-sun');
+            } else {
+                htmlElement.classList.remove('dark');
+                if (themeIcon) themeIcon.classList.replace('fa-sun', 'fa-moon');
+                if (themeIconMobile) themeIconMobile.classList.replace('fa-sun', 'fa-moon');
+            }
+        }
+
+        function toggleTheme() {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                if (themeIcon) themeIcon.classList.replace('fa-sun', 'fa-moon');
+                if (themeIconMobile) themeIconMobile.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                if (themeIcon) themeIcon.classList.replace('fa-moon', 'fa-sun');
+                if (themeIconMobile) themeIconMobile.classList.replace('fa-moon', 'fa-sun');
+            }
+        }
+        
+        // Aplicar preferência de tema ao carregar
+        document.addEventListener('DOMContentLoaded', applyThemePreference);
+        
+        if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+        if (themeToggleMobile) themeToggleMobile.addEventListener('click', toggleTheme);
+
+        // --- Lógica para o Menu Móvel ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+            mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.setAttribute('aria-hidden', isExpanded);
+        });
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target) && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // --- Lógica para Animação de Scroll ---
+        const scrollAnimateElements = document.querySelectorAll('.fade-in-up');
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        scrollAnimateElements.forEach(element => {
+            observer.observe(element);
+        });
+
+        // --- Lógica para o Formulário de Contato ---
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showCustomAlert('Solicitação enviada com sucesso! Entraremos em contato em breve.');
+            this.reset();
+        });
+
+        // --- Lógica para Alerta Personalizado ---
+        function showCustomAlert(message) {
+            const alertBox = document.getElementById('custom-alert');
+            const alertMessage = document.getElementById('alert-message');
+            const alertOverlay = document.getElementById('alert-overlay');
+
+            alertMessage.textContent = message;
+            alertBox.classList.remove('hidden');
+            alertOverlay.classList.remove('hidden');
+            
+            // Fechar alerta ao pressionar ESC
+            document.addEventListener('keydown', function closeOnEsc(e) {
+                if (e.key === 'Escape') {
+                    alertBox.classList.add('hidden');
+                    alertOverlay.classList.add('hidden');
+                    document.removeEventListener('keydown', closeOnEsc);
+                }
+            });
+        }
+
+        document.getElementById('alert-close').addEventListener('click', function() {
+            document.getElementById('custom-alert').classList.add('hidden');
+            document.getElementById('alert-overlay').classList.add('hidden');
+        });
+
+        // --- Rolagem suave para links âncora ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const headerOffset = 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                    
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+        });
+
+        // Focar no primeiro campo do formulário ao navegar para a seção de contato
+        const contactLink = document.querySelector('a[href="#contato"]');
+        if (contactLink) {
+            contactLink.addEventListener('click', () => {
+                setTimeout(() => {
+                    const nameInput = document.getElementById('name');
+                    if (nameInput) nameInput.focus();
+                }, 800);
+            });
+        }
+    </script>
+</body>
+</html>
